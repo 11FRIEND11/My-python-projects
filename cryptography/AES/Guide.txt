@@ -1,0 +1,21 @@
+This folder consists of the a text file which the code will be texted on.
+file_encryptor.txt contains python code that will be used to encryt and decrypt the message
+this folder also contains a secret.key which is the key for decryption
+
+
+To encrypt the file using the terminal, run this code:
+python3 AES_Encryptor.py encrypt message.txt
+--------------------------
+This will create a new text file: message.txt.enc
+it will also delete the original file making it unretainable without the security key 
+-------------------------
+-------------------------
+to decrypt the file using the terminal, run this code:
+python3 AES_Encryptor.py decrypt message.txt.enc
+-------------------------
+This will decrypt the file using the secret key and delete the encrypted file because it has no use
+
+
+Important Notes:
+Backup your secret key (secret.key). If lost, you won't be able to decrypt your files.
+Ensure you enter commands correctly to avoid errors.
