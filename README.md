@@ -1,18 +1,19 @@
 # My Python Projects
 
-A collection of Python projects focused on cryptography, including AES and RSA encryption and decryption.
+This repository contains a collection of Python projects, including encryption algorithms and educational tools. Each project has its own folder with its respective code and a guide to help you use it.
 
-## Projects
+## Projects:
 
-### AES Encryption and Decryption
-This folder contains Python code to perform AES encryption and decryption on files. The code implements AES with key management and file encryption/decryption.
+### 1. **AES Encryption**
+   - This folder contains Python code for AES encryption and decryption.
 
-### RSA Encryption and Decryption
-This folder contains Python code to perform RSA encryption and decryption on files. The code implements RSA key generation, encryption, and decryption.
+### 2. **RSA Encryption**
+   - This folder contains Python code for RSA encryption and decryption.
 
-## Installation
+### 3. **Keylogger**
+   - A simple keylogger made for educational purposes only. It captures keystrokes and saves them to a text file. A detailed guide for using the keylogger is provided in the repository.
 
-To use this project, you need Python 3 and the `cryptography` library.
-
-```bash
-pip install cryptography
+## Setup:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/my-python-projects.git
