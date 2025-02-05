@@ -5,15 +5,15 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 import os
 
-# Key generation
+# Generate Key
 def generate_rsa_keys():
-    # Generate RSA private key
+    # private key
     private_key = rsa.generate_private_key(
         public_exponent=65537,
         key_size=2048,
     )
 
-    # Generate public key from private key
+    #  public key from the private key
     public_key = private_key.public_key()
 
     # Save private key
@@ -37,7 +37,7 @@ def generate_rsa_keys():
 
     print("RSA keys generated and saved as private.pem and public.pem.")
 
-# Encryption function
+# Encryptor
 def encrypt_file(filename):
     # Load public key
     with open("public.pem", "rb") as public_pem:
@@ -47,7 +47,7 @@ def encrypt_file(filename):
     with open(filename, "rb") as file:
         file_data = file.read()
 
-    # Encrypt file content using RSA and OAEP padding
+    # Encrypt
     encrypted_data = public_key.encrypt(
         file_data,
         padding.OAEP(
@@ -57,24 +57,22 @@ def encrypt_file(filename):
         )
     )
 
-    # Write the encrypted data to a new file
     with open(f"{filename}.enc", "wb") as enc_file:
         enc_file.write(encrypted_data)
 
     os.remove(filename)
     print(f"{filename} encrypted successfully!")
 
-# Decryption function
+# Decryptor
 def decrypt_file(filename):
     # Load private key
     with open("private.pem", "rb") as private_pem:
         private_key = serialization.load_pem_private_key(private_pem.read(), password=None)
 
-    # Read encrypted file
     with open(filename, "rb") as enc_file:
         encrypted_data = enc_file.read()
 
-    # Decrypt data using RSA and OAEP padding
+    # Decrypt data using RSA
     decrypted_data = private_key.decrypt(
         encrypted_data,
         padding.OAEP(
@@ -84,7 +82,6 @@ def decrypt_file(filename):
         )
     )
 
-    # Write decrypted data to a new file
     original_filename = filename.rsplit(".enc", 1)[0]
     with open(original_filename, "wb") as dec_file:
         dec_file.write(decrypted_data)
@@ -92,7 +89,7 @@ def decrypt_file(filename):
     os.remove(filename)
     print(f"{filename} decrypted successfully!")
 
-# Main function for CLI arguments
+# Main
 def main():
     if len(sys.argv) != 3:
         print("Usage: python3 rsa_file_encryptor.py [encrypt|decrypt] [filename]")
