@@ -2,18 +2,18 @@ from cryptography.fernet import Fernet
 import sys
 import os
 
-# Generate and save the key
+#save key
 def generate_key():
     key = Fernet.generate_key()
     with open("secret.key", "wb") as key_file:
         key_file.write(key)
     return key
 
-# Load the key from file
+# Load key
 def load_key():
     return open("secret.key", "rb").read()
 
-# Encrypt the file and delete the original
+# Encrypt the file + delete original file
 def encrypt_file(filename, key):
     with open(filename, "rb") as file:
         data = file.read()
@@ -21,10 +21,10 @@ def encrypt_file(filename, key):
     encrypted = fernet.encrypt(data)
     with open(filename + ".enc", "wb") as enc_file:
         enc_file.write(encrypted)
-    os.remove(filename)  # Delete original file
+    os.remove(filename) 
     print(f"{filename} encrypted!")
 
-# Decrypt the file and delete the encrypted version
+# Decrypt the file + delete encrypted file
 def decrypt_file(filename, key):
     with open(filename, "rb") as file:
         encrypted_data = file.read()
@@ -33,10 +33,10 @@ def decrypt_file(filename, key):
     output_file = filename.replace(".enc", "")
     with open(output_file, "wb") as dec_file:
         dec_file.write(decrypted)
-    os.remove(filename)  # Delete encrypted file
+    os.remove(filename) 
     print(f"{filename} decrypted!")
 
-# Main function
+# Main
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Usage: python3 file_encryptor.py <encrypt/decrypt> <filename>")
