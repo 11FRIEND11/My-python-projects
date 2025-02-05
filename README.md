@@ -13,6 +13,8 @@ This repository contains a collection of Python projects, including encryption a
 ### 3. **Keylogger**
    - A simple keylogger made for educational purposes only. It captures keystrokes and saves them to a text file. A detailed guide for using the keylogger is provided in the repository.
 
+NOTE: This project is for educational purposes only. The author is not responsible for any misuse.
+
 ## Setup:
 1. Clone the repository:
    ```bash
