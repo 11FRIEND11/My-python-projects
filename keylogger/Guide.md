@@ -4,8 +4,8 @@ systems where you have permission to do so, i am not responsible if any legal ac
 Instructions:
 
 1. Install Dependencies:
-   ~~~console
    Make sure pynput is installed. To do this, run the following command in your terminal:
+   ~~~console
    pip install pynput
    ~~~
 
